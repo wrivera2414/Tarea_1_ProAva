@@ -10,7 +10,8 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hola bienvenido a tu calculadora de áreas" );
+    	String nombre = "Wencell";
+        System.out.println( "Hola bienvenido a tu calculadora de áreas  " +nombre);
         int opcion = 0;
         
         while(opcion !=5) {
