@@ -11,7 +11,9 @@ public class App
     public static void main( String[] args )
     {
     	String nombre = "Wencell";
+    	String apellido = "Rivera";
         System.out.println( "Hola bienvenido a tu calculadora de áreas  " +nombre);
+        System.out.println( "Hola bienvenido a tu calculadora de áreas  " +apellido);
         int opcion = 0;
         
         while(opcion !=5) {
