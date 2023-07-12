@@ -1,4 +1,4 @@
-package hn.clinica.views.medicamentos;
+package hn.clinica.views.consulta;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Text;
@@ -20,10 +20,8 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.spring.data.VaadinSpringDataHelpers;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 import hn.clinica.data.entity.SamplePerson;
-import hn.clinica.data.service.SamplePersonService;
 import hn.clinica.views.MainLayout;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -32,23 +30,19 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 
-@PageTitle("Medicamentos")
-@Route(value = "medicamentos", layout = MainLayout.class)
+@PageTitle("Consulta")
+@Route(value = "consulta", layout = MainLayout.class)
 @Uses(Icon.class)
-public class MedicamentosView extends Div {
+public class ConsultaView extends Div {
 
     private Grid<SamplePerson> grid;
 
     private Filters filters;
-    private final SamplePersonService samplePersonService;
-
-    public MedicamentosView(SamplePersonService SamplePersonService) {
-        this.samplePersonService = SamplePersonService;
+    public ConsultaView() {
         setSizeFull();
-        addClassNames("medicamentos-view");
+        addClassNames("consulta-view");
 
         filters = new Filters(() -> refreshGrid());
         VerticalLayout layout = new VerticalLayout(createMobileFilters(), filters, createGrid());
@@ -84,8 +78,8 @@ public class MedicamentosView extends Div {
 
     public static class Filters extends Div implements Specification<SamplePerson> {
 
-        private final TextField name = new TextField("Nombre");
-        private final TextField phone = new TextField("Telefono");
+        private final TextField name = new TextField("Name");
+        private final TextField phone = new TextField("Phone");
         private final DatePicker startDate = new DatePicker("Date of Birth");
         private final DatePicker endDate = new DatePicker();
         private final MultiSelectComboBox<String> occupations = new MultiSelectComboBox<>("Occupation");
@@ -232,9 +226,10 @@ public class MedicamentosView extends Div {
         grid.addColumn("occupation").setAutoWidth(true);
         grid.addColumn("role").setAutoWidth(true);
 
-        grid.setItems(query -> samplePersonService.list(
+        /*grid.setItems(query -> samplePersonService.list(
                 PageRequest.of(query.getPage(), query.getPageSize(), VaadinSpringDataHelpers.toSpringDataSort(query)),
-                filters).stream());
+                filters).stream());*/
+        
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
         grid.addClassNames(LumoUtility.Border.TOP, LumoUtility.BorderColor.CONTRAST_10);
 
